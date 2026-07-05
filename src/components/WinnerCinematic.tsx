@@ -209,8 +209,15 @@ const row: React.CSSProperties = {
 const left = { display: "flex", gap: 20 };
 const rank = { opacity: 0.5, fontWeight: 800 };
 const pname = { fontWeight: 700 };
-const shots = { opacity: 0.5, textAlign: "center", fontWeight: 700 };
-const points = { fontWeight: 800, textAlign: "right" };
+const shots: React.CSSProperties = {
+  opacity: 0.5,
+  textAlign: "center",
+  fontWeight: 600,
+};
+const points: React.CSSProperties = {
+  fontWeight: 800,
+  textAlign: "right",
+};
 
 function btn(bg: string): React.CSSProperties {
   return {

@@ -95,7 +95,7 @@ export default function GamePage() {
 // SCORECARD OVERLAY
 // -----------------------------
 
-const holes = players[player]?.holes || {};
+const holes = (players[player]?.holes ?? {}) as Record<string, number>;
 
 const totals = Object.entries(holes).reduce(
   (acc, [hole, strokes]) => {
@@ -128,7 +128,7 @@ const scorecard = (
       <div style={{ textAlign: "right" }}>Points</div>
     </div>
 
-    {Object.entries(holes).map(([hole, strokes]) => {
+    {Object.entries(holes).map(([hole, strokes]: [string, number]) => {
       const ranking = calculateHolePoints(players, Number(hole));
       const me = ranking.find((p) => p.name === player);
 
@@ -385,7 +385,7 @@ const scorecard = (
               </div>
 
               {Object.keys(players).map((name) => (
-                <div key={name} style={{ padding: "16px", fontSize: 20, fontWeight: 800, border: "0.5px solid #000", padding: 18, borderRadius: 14, marginBottom: 10, }}>
+                <div key={name} style={{fontSize: 20, fontWeight: 800, border: "0.5px solid #000", padding: 18, borderRadius: 14, marginBottom: 10, }}>
                   👤 {name}
                 </div>
               ))}
