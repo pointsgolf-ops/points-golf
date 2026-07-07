@@ -29,7 +29,7 @@ export default function HoleBreakdown({
 
   return (
     <div style={wrap}>
-      <div style={title}>Hole {currentHole} Results</div>
+    <div className="font-display" style={{ textAlign: "center", fontWeight: 900, fontSize: 25 }}>HOLE {currentHole} RESULTS</div>
 
       <div style={list}>
         {sorted.map((p, index) => {

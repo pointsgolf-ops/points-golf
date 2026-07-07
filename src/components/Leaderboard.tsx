@@ -26,7 +26,7 @@ export default function Leaderboard({ players }: Props) {
 
   return (
     <div style={wrap}>
-      <div style={title}>Leaderboard</div>
+      <div className="font-display" style={title}>LEADERBOARD</div>
 
       <div style={list}>
         {sorted.map((p, index) => {
@@ -82,8 +82,8 @@ const wrap: React.CSSProperties = {
 };
 
 const title: React.CSSProperties = {
-  fontSize: 20,
-  fontWeight: 800,
+  fontSize: 25,
+  fontWeight: 900,
   textAlign: "center",
 };
 

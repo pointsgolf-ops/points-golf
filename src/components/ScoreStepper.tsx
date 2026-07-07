@@ -5,26 +5,29 @@ import { useRef, useState } from "react";
 export default function ScoreStepper({
   onSubmit,
   disabled,
+  submitted,
 }: {
   onSubmit: (score: number) => void;
   disabled?: boolean;
+  submitted?: boolean;
 }) {
   const [scoreValue, setScoreValue] = useState(0);
   const ref = useRef(0);
 
   function inc() {
-    if (disabled) return;
+    if (disabled || submitted) return;
     ref.current += 1;
     setScoreValue(ref.current);
   }
 
   function dec() {
-    if (disabled) return;
+    if (disabled || submitted) return;
     ref.current = Math.max(0, ref.current - 1);
     setScoreValue(ref.current);
   }
 
   function submit() {
+    if (submitted) return;
     onSubmit(ref.current);
   }
 
@@ -36,6 +39,24 @@ export default function ScoreStepper({
     e.currentTarget.style.transform = "scale(1)";
   };
 
+  if (submitted) {
+    return (
+      <div
+        style={{
+          textAlign: "center",
+          fontSize: 18,
+          fontWeight: 600,
+          opacity: 0.5,
+          padding: 10,
+        }}
+      >
+        <p className="font-display" style={{fontSize: 22,
+          fontWeight: 900}}>SCORE SUBMITTED</p>
+        Waiting for other players...
+      </div>
+    );
+  }
+  
   return (
     <div style={wrap}>
       <div style={row}>
@@ -47,9 +68,9 @@ export default function ScoreStepper({
         >
           −
         </button>
-
-        <div style={scoreDisplay}>{scoreValue}</div>
-
+  
+        <div className="font-display" style={scoreDisplay}>{scoreValue}</div>
+  
         <button
           onClick={inc}
           style={btn}
@@ -59,7 +80,7 @@ export default function ScoreStepper({
           +
         </button>
       </div>
-
+  
       <button
         onClick={submit}
         style={submitBtn}

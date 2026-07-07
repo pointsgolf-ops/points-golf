@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, runTransaction } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import AppShell from "@/components/AppShell";
 
@@ -67,34 +67,59 @@ export default function Home() {
   // JOIN GAME
   // -----------------------------
   async function handleJoinGame() {
+
     if (!name.trim()) {
       alert("Please enter your name");
       return;
     }
-
+  
     if (!joinCode.trim()) {
       alert("Please enter a game code");
       return;
     }
-
+  
     const gameCode = joinCode.toUpperCase();
-
-    await setDoc(
-      doc(db, "games", gameCode),
-      {
-        players: {
-          [name]: {
-            name,
-            holes: {},
-            totalPoints: 0,
-            totalStrokes: 0,
-          },
-        },
-      },
-      { merge: true }
+  
+    const ref = doc(db, "games", gameCode);
+  
+  
+    await runTransaction(db, async (transaction) => {
+  
+      const snap = await transaction.get(ref);
+  
+      if (!snap.exists()) {
+        throw new Error("Game not found");
+      }
+  
+  
+      const data = snap.data();
+  
+      const existingPlayers = data.players || {};
+  
+  
+      // Do nothing if player already exists
+      if (existingPlayers[name]) {
+        return;
+      }
+  
+  
+      transaction.update(ref, {
+  
+        [`players.${name}`]: {
+          name,
+          holes: {},
+          totalPoints: 0,
+          totalStrokes: 0,
+        }
+  
+      });
+  
+    });
+  
+  
+    router.push(
+      `/game/${gameCode}?player=${encodeURIComponent(name)}`
     );
-
-    router.push(`/game/${gameCode}?player=${encodeURIComponent(name)}`);
   }
 
   const press = {
@@ -137,7 +162,7 @@ export default function Home() {
         {mode === "home" && (
           <>
           <img src="/points-home.svg" style={{ width: "100%", height: "auto" }} />
-            <button
+            <button 
               onClick={() => setMode("create")}
               style={{
                 padding: 18,

@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Gabarito, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+const gabarito = Gabarito({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-dm-sans",
+  variable: "--font-gabarito",
 });
 
-export const metadata = {
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-space-grotesk",
+});
+
+export const metadata: Metadata = {
   title: "Points Golf",
   manifest: "/manifest.json",
   description: "Golf scored differently.",
@@ -27,14 +33,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable} h-full antialiased`}>
-      <body
-        className="min-h-full flex flex-col"
-        style={{
-          fontFamily: "var(--font-dm-sans)",
-          letterSpacing: "-0.02em",
-        }}
-      >
+    <html
+  lang="en"
+  className={`${gabarito.variable} ${spaceGrotesk.variable} h-full antialiased`}
+>
+<body
+  className="min-h-full flex flex-col"
+  style={{
+    fontFamily: "var(--font-space-grotesk)",
+    letterSpacing: "-0.01em",
+  }}
+>
         {children}
       </body>
     </html>

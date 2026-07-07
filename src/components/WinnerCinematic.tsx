@@ -121,7 +121,7 @@ export default function WinnerCinematic({
             transform: show ? "scale(1)" : "scale(0.9)",
           }}
         >
-          <div style={exportHeader}>Game Results</div>
+          <div className="font-display" style={exportHeader}>GAME RESULTS</div>
           <div style={exportWinnerLabel}>{winner} {title} with {score} points</div>
   
           <div style={list}>
@@ -187,7 +187,7 @@ const playAgainBtn = {
   border: "0.5px solid #222",
 };
 
-const exportHeader = { fontSize: 18, fontWeight: 700, paddingBottom: 20, opacity: 0.5, };
+const exportHeader = { fontSize: 22, fontWeight: 900, paddingBottom: 20, opacity: 0.5, };
 const exportWinnerLabel = { fontSize: 22, fontWeight: 700, paddingBottom: 10, lineHeight: 1.2, };
 
 const list: React.CSSProperties = {

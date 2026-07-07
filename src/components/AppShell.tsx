@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRef } from "react";
+import { ClipboardList, CircleHelp, X } from "lucide-react";
 
 export default function AppShell({
     children,
@@ -29,33 +29,47 @@ export default function AppShell({
       <div style={device}>
 
         {/* HEADER */}
-        <div style={headerWrap}>
-          <div style={header}>
-            <div style={title}><img src="/points-logo.svg" style={{ height: 50 }} /></div>
+<div style={headerWrap}>
+  <div style={header}>
 
-            {/* SCORECARD BUTTON (ONLY IN-GAME USAGE EXPECTED) */}
-            {showScorecardButton && (
-  <button
-    onClick={() => setShowScorecard(true)}
-    style={button}
-  >
-    View Scorecard
-  </button>
+    {/* LEFT ICON */}
+    <div style={headerSide}>
+      {showScorecardButton && (
+        <button
+          onClick={() => setShowScorecard(true)}
+          style={iconButton}
+          aria-label="View scorecard"
+        >
+          <ClipboardList size={26} />
+        </button>
+      )}
+    </div>
 
-  
-)}
 
-{showFAQButton && (
-  <button
-    onClick={() => setShowFAQ(true)}
-    style={button}
-  >
-    Help
-  </button>
-)}
+    {/* CENTRE LOGO */}
+    <div style={logo}>
+      <img
+        src="/points-logo.svg"
+        style={{ height: 50 }}
+      />
+    </div>
 
-          </div>
-        </div>
+
+    {/* RIGHT ICON */}
+    <div style={headerSide}>
+      {showFAQButton && (
+        <button
+          onClick={() => setShowFAQ(true)}
+          style={iconButton}
+          aria-label="Help"
+        >
+          <CircleHelp size={26} />
+        </button>
+      )}
+    </div>
+
+  </div>
+</div>
 
         {/* PAGE CONTENT */}
         <div style={content}>{children}</div>
@@ -66,18 +80,19 @@ export default function AppShell({
     {/* BACKDROP */}
     <div
       onClick={() => setShowScorecard(false)}
-      style={backdrop}
+      
     />
 
     {/* BOTTOM SHEET */}
     <div style={sheet}>
 
-      <button
-        onClick={() => setShowScorecard(false)}
-        style={close}
-      >
-        Close
-      </button>
+    <button
+  onClick={() => setShowScorecard(false)}
+  style={close}
+  aria-label="Close"
+>
+  <X/>
+</button>
 
       <h2 style={{ fontSize: 20, fontWeight: 800 }}>
         Your Scorecard
@@ -100,16 +115,17 @@ export default function AppShell({
   <>
     <div
       onClick={() => setShowFAQ(false)}
-      style={backdrop}
+      
     />
 
     <div style={sheet}>
-      <button
-        onClick={() => setShowFAQ(false)}
-        style={close}
-      >
-        Close
-      </button>
+    <button
+  onClick={() => setShowFAQ(false)}
+  style={close}
+  aria-label="Close"
+>
+  <X/>
+</button>
 
       <h2 style={{ fontSize: 20, fontWeight: 800 }}>
         Frequently Asked Questions
@@ -157,25 +173,37 @@ const outer: React.CSSProperties = {
     background: "none",
   };  
 
-const header: React.CSSProperties = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "18px 16px",
-};
-
-const title: React.CSSProperties = {
-  fontSize: 18,
-  fontWeight: 800,
-};
-
-const button: React.CSSProperties = {
-  fontSize: 20,
-  fontWeight: 600,
-  background: "transparent",
-  border: "none",
-  opacity: 0.5,
-};
+  const header: React.CSSProperties = {
+    display: "grid",
+    gridTemplateColumns: "40px 1fr 40px",
+    alignItems: "center",
+    padding: "18px 16px",
+  };
+  
+  
+  const headerSide: React.CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+  };
+  
+  
+  const logo: React.CSSProperties = {
+    display: "flex",
+    justifyContent: "center",
+  };
+  
+  
+  const iconButton: React.CSSProperties = {
+    width: 26,
+    height: 26,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "transparent",
+    border: "none",
+    opacity: 0.5,
+    padding: 0,
+  };
 
 const content: React.CSSProperties = {
     paddingTop: 80,
@@ -185,61 +213,39 @@ const content: React.CSSProperties = {
     boxSizing: "border-box",
   };
 
-const overlay: React.CSSProperties = {
-  position: "fixed",
-  inset: 0,
-  background: "#fcf5ed",
-  zIndex: 2000,
-  overflowY: "auto",
-};
-
-const overlayInner: React.CSSProperties = {
-  maxWidth: 440,
-  margin: "0 auto",
-  padding: "80px 16px 40px",
-};
-
-const close: React.CSSProperties = {
-  position: "absolute",
-  top: 20,
-  right: 20,
-  fontSize: 20,
-  opacity: 0.5,
-  fontWeight: 600,
-  border: "none",
-  background: "transparent",
-};
+  const close: React.CSSProperties = {
+    position: "absolute",
+    top: 18,
+    right: 16,
+    width: 40,
+    height: 40,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    opacity: 0.5,
+    border: "none",
+    background: "transparent",
+    padding: 0,
+  };
 
 const row: React.CSSProperties = {
   padding: "14px 0",
   borderBottom: "1px solid #000",
   fontSize: 16,
 };
-
-const backdrop: React.CSSProperties = {
-    position: "fixed",
-    inset: 0,
-    background: "rgba(0,0,0,0.35)",
-    zIndex: 2000,
-    animation: "fadeIn 0.5s ease",
-  };
   
-  const sheet: React.CSSProperties = {
-    position: "fixed",
-    left: "50%",
-    bottom: 20,          
-    transform: "translateX(-50%)",
-    width: "calc(100% - 10px)",
-    maxWidth: 440,        
-    maxHeight: "85vh",
-    background: "#fff",
-    borderRadius: 20,    
-    padding: "20px 24px 40px",
-    overflowY: "auto",
-    WebkitOverflowScrolling: "touch",
-    zIndex: 2100,
-    animation: "slideUp 0.25s ease",
-  };
+const sheet: React.CSSProperties = {
+  position: "absolute",
+  inset: 0,
+  width: "100%",
+  minHeight: "100vh",
+  background: "#fff",
+  overflowY: "auto",
+  WebkitOverflowScrolling: "touch",
+  zIndex: 2100,
+  padding: "80px 20px 40px",
+  boxSizing: "border-box",
+};
 
   const faqContainer: React.CSSProperties = {
     marginTop: 20,
