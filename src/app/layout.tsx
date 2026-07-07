@@ -36,12 +36,16 @@ export default function RootLayout({
     <html
   lang="en"
   className={`${gabarito.variable} ${spaceGrotesk.variable} h-full antialiased`}
+  style={{ colorScheme: "only light" }}
 >
 <body
   className="min-h-full flex flex-col"
   style={{
     fontFamily: "var(--font-space-grotesk)",
     letterSpacing: "-0.01em",
+    color: "#000000",
+    background: "#fcf4e3",
+    colorScheme: "only light",
   }}
 >
         {children}

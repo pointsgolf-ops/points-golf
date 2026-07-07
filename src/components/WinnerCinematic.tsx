@@ -222,7 +222,6 @@ const points: React.CSSProperties = {
 function btn(bg: string): React.CSSProperties {
   return {
     width: "100%",
-    maxWidth: 440,
     padding: 18,
     borderRadius: 14,
     fontSize: 20,

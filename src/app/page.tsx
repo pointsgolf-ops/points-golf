@@ -211,6 +211,7 @@ export default function Home() {
                 padding: 18,
                 borderRadius: 14,
                 background: "#fff",
+                color: "#000",
                 border: "0.5px solid #000",
                 fontSize: 20,
               }}
@@ -224,6 +225,7 @@ export default function Home() {
                 padding: 18,
                 borderRadius: 14,
                 background: "#fff",
+                color: "#000",
                 border: "0.5px solid #000",
                 fontSize: 20,
               }}
@@ -307,6 +309,7 @@ export default function Home() {
                 padding: 18,
                 borderRadius: 14,
                 background: "#fff",
+                color: "#000",
                 border: "0.5px solid #000",
                 fontSize: 20,
               }}
@@ -320,6 +323,7 @@ export default function Home() {
                 padding: 18,
                 borderRadius: 14,
                 background: "#fff",
+                color: "#000",
                 border: "0.5px solid #000",
                 fontSize: 20,
               }}
