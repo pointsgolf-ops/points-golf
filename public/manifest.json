@@ -3,8 +3,8 @@
   "short_name": "Points Golf",
   "start_url": "/",
   "display": "standalone",
-"theme_color": "#fcf4e3",
-"background_color": "#fcf4e3"
+"theme_color": "#FBFBFB",
+"background_color": "#FBFBFB"
   "icons": [
     {
       "src": "/icons/icon-192.png",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ClipboardList, CircleHelp, X } from "lucide-react";
+import { BookOpen, CircleHelp, X } from "lucide-react";
 
 export default function AppShell({
     children,
@@ -40,7 +40,7 @@ export default function AppShell({
           style={iconButton}
           aria-label="View scorecard"
         >
-          <ClipboardList size={26} />
+          <BookOpen size={26} />
         </button>
       )}
     </div>
@@ -50,7 +50,7 @@ export default function AppShell({
     <div style={logo}>
       <img
         src="/points-logo.svg"
-        style={{ height: 50 }}
+        style={{ height: 60 }}
       />
     </div>
 
@@ -149,7 +149,7 @@ export default function AppShell({
 
 const outer: React.CSSProperties = {
     minHeight: "100vh",
-    background: "#fcf4e3",
+    background: "#FBFBFB",
     display: "flex",
     justifyContent: "center",
   };
@@ -157,7 +157,7 @@ const outer: React.CSSProperties = {
   const device: React.CSSProperties = {
     width: "100%",
     maxWidth: 440,
-    background: "#fcf4e3",
+    background: "#FBFBFB",
     minHeight: "100vh",
     position: "relative",
   };
@@ -230,7 +230,7 @@ const content: React.CSSProperties = {
 
 const row: React.CSSProperties = {
   padding: "14px 0",
-  borderBottom: "1px solid #000",
+  borderBottom: "1px solid rgba(0,0,0,0.3)",
   fontSize: 16,
 };
   

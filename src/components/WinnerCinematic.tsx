@@ -134,8 +134,8 @@ export default function WinnerCinematic({
                   style={{
                     ...row,
                     border: isWinner
-                      ? "1px solid #f0de7e"
-                      : "0.5px solid #222",
+                      ? "1px solid #FFD700"
+                      : "0.5px solid rgba(0,0,0,0.3)",
                   }}
                 >
                   <div style={left}>
@@ -153,9 +153,6 @@ export default function WinnerCinematic({
   
         {/* ACTIONS */}
         <div style={actions}>
-        <button onClick={handleShare} style={shareBtn} >
-          Share Results
-        </button>
   
         <button onClick={() => router.push("/")} style={playAgainBtn}>
           Play Again
@@ -175,6 +172,7 @@ const card: React.CSSProperties = {
   padding: 20,
   borderRadius: 18,
   background: "#fff",
+  border: "0.5px solid rgba(0,0,0,0.3)",
 };
 
 const shareBtn = {
@@ -184,7 +182,7 @@ const shareBtn = {
 
 const playAgainBtn = {
   ...btn("transparent"),
-  border: "0.5px solid #222",
+  border: "0.5px solid rgba(0,0,0,0.3)",
 };
 
 const exportHeader = { fontSize: 22, fontWeight: 900, paddingBottom: 20, opacity: 0.5, };
@@ -233,7 +231,7 @@ function btn(bg: string): React.CSSProperties {
 const overlay: React.CSSProperties = {
   position: "fixed",
   inset: 0,
-  background: "rgba(0,0,0,0.4)",
+  background: "rgba(0,0,0,0.3)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

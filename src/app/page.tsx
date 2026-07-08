@@ -141,9 +141,9 @@ export default function Home() {
   showFAQButton={true}
   faq={
     <>
-      <p><b>How does Points work?</b><br />It’s simple. Score one point for every player you beat outright on each hole..</p>
-      <p><b>Stoke play or match play?</b><br />A bit of both. Strokes are recorded each hole and used to calculate your points. The total number of points over 18 holes determines the winner. Like match play, every hole is its own contest, so one bad hole won’t ruin your round, but one great hole can quickly move you up the leaderboard.</p>
-      <p><b>Where can I play?</b><br />Points works on any course. No ratings or setup required.</p>
+      <p><b>How does Points work?</b><br />It’s simple. Score one point for every player you beat outright on each hole.</p>
+      <p><b>Stoke play or match play?</b><br />A bit of both. Strokes are recorded each hole and used to calculate your points, by comparing your score against other players in your group. Like match play, every hole is its own contest, so one bad hole won’t ruin your round, but one great hole can quickly move you up the leaderboard. The total number of points over 18 holes determines the winner.</p>
+      <p><b>Where can I play?</b><br />Points works on any course. No ratings or downloads required.</p>
       <p><b>How many players and holes can I play?</b><br />Points works with 2+ players and can be played over 9 or 18 holes.</p>
       <p><b>Can I view my score during a round?</b><br />Yes. Your live scorecard is always available so you can review strokes and points hole-by-hole at any time.</p>
       <p><b>How do handicaps work?</b><br />Points uses gross scores by default. If your group prefers, handicaps can be adjusted manually before entering scores for each hole.</p>
@@ -161,12 +161,12 @@ export default function Home() {
         {/* ---------------- HOME ---------------- */}
         {mode === "home" && (
           <>
-          <img src="/points-home.svg" style={{ width: "100%", height: "auto" }} />
+          <img src="/points-home.svg" style={{ padding: "30px 0", width: "100%", height: "auto" }} />
             <button 
               onClick={() => setMode("create")}
               style={{
                 padding: 18,
-                background: "#c18e44",
+                background: "#C2DD00",
                 border: "none",
                 borderRadius: 14,
                 fontWeight: 700,
@@ -186,7 +186,7 @@ export default function Home() {
                 padding: 18,
                 background: "none",
                 borderRadius: 14,
-                border: "0.5px solid #000",
+                border: "0.5px solid rgba(0,0,0,0.3)",
                 fontWeight: 700,
                 fontSize: 20,
                 ...press,
@@ -212,7 +212,7 @@ export default function Home() {
                 borderRadius: 14,
                 background: "#fff",
                 color: "#000",
-                border: "0.5px solid #000",
+                border: "0.5px solid rgba(0,0,0,0.3)",
                 fontSize: 20,
               }}
             />
@@ -226,7 +226,7 @@ export default function Home() {
                 borderRadius: 14,
                 background: "#fff",
                 color: "#000",
-                border: "0.5px solid #000",
+                border: "0.5px solid rgba(0,0,0,0.3)",
                 fontSize: 20,
               }}
             />
@@ -239,7 +239,7 @@ export default function Home() {
                   padding: 18,
                   borderRadius: 14,
                   fontSize: 20,
-                  border: "0.5px solid #222",
+                  border: "0.5px solid rgba(0,0,0,0.3)",
                   background: maxHoles === 9 ? "#000" : "#fff",
                   color: maxHoles === 9 ? "#fff" : "#000",
                   fontWeight: 600,
@@ -259,7 +259,7 @@ export default function Home() {
                   padding: 18,
                   borderRadius: 14,
                   fontSize: 20,
-                  border: "0.5px solid #000",
+                  border: "0.5px solid rgba(0,0,0,0.3)",
                   background: maxHoles === 18 ? "#000" : "#fff",
                   color: maxHoles === 18 ? "#fff" : "#000",
                   fontWeight: 600,
@@ -277,7 +277,7 @@ export default function Home() {
               onClick={handleCreateGame}
               style={{
                 padding: 18,
-                background: "#c18e44",
+                background: "#C2DD00",
                 border: "none",
                 borderRadius: 14,
                 fontWeight: 700,
@@ -310,7 +310,7 @@ export default function Home() {
                 borderRadius: 14,
                 background: "#fff",
                 color: "#000",
-                border: "0.5px solid #000",
+                border: "0.5px solid rgba(0,0,0,0.3)",
                 fontSize: 20,
               }}
             />
@@ -324,7 +324,7 @@ export default function Home() {
                 borderRadius: 14,
                 background: "#fff",
                 color: "#000",
-                border: "0.5px solid #000",
+                border: "0.5px solid rgba(0,0,0,0.3)",
                 fontSize: 20,
               }}
             />
@@ -333,7 +333,7 @@ export default function Home() {
               onClick={handleJoinGame}
               style={{
                 padding: 18,
-                background: "#c18e44",
+                background: "#C2DD00",
                 border: "none",
                 borderRadius: 14,
                 fontWeight: 700,

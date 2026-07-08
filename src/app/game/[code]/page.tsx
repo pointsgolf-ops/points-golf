@@ -9,6 +9,7 @@ import {
   runTransaction
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { Check } from "lucide-react";
 
 import AppShell from "@/components/AppShell";
 import GameCard from "@/components/GameCard";
@@ -259,7 +260,7 @@ setPlayers((prev: any) => {
           display: "grid",
           gridTemplateColumns: "1fr 100px 70px",
           padding: "16px 0 12px",
-          borderBottom: "1px solid #000",
+          borderBottom: "1px solid rgba(0,0,0,0.3)",
           fontSize: 18,
           fontWeight: 600,
           opacity: 0.5,
@@ -306,7 +307,7 @@ setPlayers((prev: any) => {
               padding: "18px 0",
               fontSize: 18,
               fontWeight: 600,
-              borderBottom: "0.5px solid #000",
+              borderBottom: "0.5px solid rgba(0,0,0,0.3)",
             }}
           >
   
@@ -352,7 +353,7 @@ setPlayers((prev: any) => {
           padding: "18px 0",
           fontSize: 18,
           fontWeight: 800,
-          borderTop: "1px solid #000",
+          borderTop: "1px solid rgba(0,0,0,0.3)",
         }}
       >
   
@@ -405,7 +406,11 @@ setPlayers((prev: any) => {
               textAlign: "center",
               fontSize: 36,
               fontWeight: 900,
+              
             }}
+            onMouseDown={down}
+              onMouseUp={up}
+              onMouseLeave={up}
           >
             GAME OVER
           </div>
@@ -428,7 +433,7 @@ setPlayers((prev: any) => {
     marginTop: 24,
     background: "none",
     borderRadius: 14,
-    border: "0.5px solid #000",
+    border: "0.5px solid rgba(0,0,0,0.3)",
     fontWeight: 700,
     fontSize: 20,
     width: "100%",
@@ -472,18 +477,21 @@ setPlayers((prev: any) => {
 
   {Object.keys(players).map((name) => (
     <div
-      key={name}
-      style={{
-        fontSize: 20,
-        fontWeight: 800,
-        border: "0.5px solid #000",
-        padding: 18,
-        borderRadius: 14,
-        marginBottom: 10,
-      }}
-    >
-      👤 {name}
-    </div>
+    key={name}
+    style={{
+      fontSize: 20,
+      fontWeight: 800,
+      border: "0.5px solid rgba(0,0,0,0.3)",
+      padding: 18,
+      borderRadius: 14,
+      marginBottom: 10,
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+    }}
+  >
+    <Check size={26} /> {name}
+  </div>
   ))}
 </div>
 
@@ -525,7 +533,7 @@ setPlayers((prev: any) => {
       ...btn,
       marginTop: 16,
       background: "#fff",
-      border: "1px solid #000",
+      border: "0.5px solid #000",
     }}
   >
     End Game
@@ -594,7 +602,7 @@ const btn: React.CSSProperties = {
   padding: 18,
   borderRadius: 14,
   border: "none",
-  background: "#c18e44",
+  background: "#C2DD00",
   color: "#000",
   fontWeight: 700,
   fontSize: 20,

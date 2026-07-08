@@ -2,17 +2,17 @@
 
 :root {
   color-scheme: only light;
-  --background: #fcf4e3;
+  --background: #FBFBFB;
   --foreground: #000000;
 }
 
 html {
   color-scheme: only light;
-  background: #fcf4e3;
+  background: #FBFBFB;
 }
 
 body {
-  background: #fcf4e3 !important;
+  background: #FBFBFB !important;
   color: #000000 !important;
   font-family: var(--font-space-grotesk);
   -webkit-text-fill-color: #000000;
@@ -61,4 +61,20 @@ button {
 
 .pop {
   animation: pop 0.15s ease;
+}
+
+.rotatingText {
+  transform-origin: 50% 50%;
+  transform-box: view-box;
+  animation: rotateText 20s linear infinite;
+}
+
+@keyframes rotateText {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -39,8 +39,8 @@ export default function Leaderboard({ players }: Props) {
                 ...row,
                 background: isWinner ? "#fff" : "#fff",
                 border: isWinner
-                  ? "1px solid #efca50"
-                  : "0.5px solid #222",
+                  ? "1px solid #FFD700"
+                  : "0.5px solid rgba(0,0,0,0.3)",
               }}
             >
               {/* LEFT */}
@@ -102,7 +102,7 @@ const row: React.CSSProperties = {
   padding: "18px 18px",
   borderRadius: 14,
   background: "#fff",
-  border: "1px solid rgba(0,0,0,0.08)",
+  border: "0.5px solid rgba(0,0,0,0.3)",
 
   transition: "all 300ms ease",
   willChange: "transform",

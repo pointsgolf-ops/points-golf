@@ -41,8 +41,8 @@ export default function HoleBreakdown({
               style={{
                 ...row,
                 border: isWinner
-                  ? "1px solid #efca50"
-                  : "1px solid rgba(0,0,0,0.08)",
+                  ? "1px solid #FFD700"
+                  : "0.5px solid rgba(0,0,0,0.3)",
 
                 background: isWinner ? "#fff" : "#fff",
                 transition: "all 200ms ease",
