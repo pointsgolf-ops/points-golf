@@ -408,9 +408,7 @@ setPlayers((prev: any) => {
               fontWeight: 900,
               
             }}
-            onMouseDown={down}
-              onMouseUp={up}
-              onMouseLeave={up}
+            
           >
             GAME OVER
           </div>
