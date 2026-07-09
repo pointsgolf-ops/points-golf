@@ -6,7 +6,7 @@ import {
   doc,
   onSnapshot,
   setDoc,
-  runTransaction
+  updateDoc
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Check } from "lucide-react";
@@ -87,49 +87,49 @@ setPlayers((prev: any) => {
     });
   }, [code]);
 
-  // -----------------------------
-  // SCORE SUBMISSION
-  // -----------------------------
-  async function submitScore(score: number) {
-    if (!code) return;
-  
-    const ref = doc(db, "games", code);
-  
-    await runTransaction(db, async (transaction) => {
-      const snap = await transaction.get(ref);
-  
-      if (!snap.exists()) return;
-  
-      const data = snap.data();
-      const players = data.players || {};
-  
-      const prev = players[player] || {};
-      const currentStrokes = prev.totalStrokes ?? 0;
-  
-      const updatedPlayers = {
-        ...players,
-        [player]: {
-          ...prev,
-          holes: {
-            ...(prev.holes || {}),
-            [currentHole]: score,
-          },
-          totalStrokes: currentStrokes + score,
-        },
-      };
-  
-      const names = Object.keys(updatedPlayers);
-  
-      const allSubmitted = names.every(
-        (n) => updatedPlayers[n]?.holes?.[currentHole] !== undefined
-      );
-  
-      transaction.update(ref, {
-        players: updatedPlayers,
-        ...(allSubmitted ? { phase: "breakdown" } : {}),
-      });
-    });
+// -----------------------------
+// AUTO BREAKDOWN WHEN ALL SCORES ENTERED
+// -----------------------------
+useEffect(() => {
+  if (!players || phase !== "game") return;
+
+  const names = Object.keys(players);
+
+  if (!names.length) return;
+
+  const allSubmitted = names.every(
+    (name) =>
+      players[name]?.holes?.[currentHole] !== undefined
+  );
+
+  if (allSubmitted && player === host) {
+    setDoc(
+      doc(db, "games", code),
+      {
+        phase: "breakdown",
+      },
+      { merge: true }
+    );
   }
+
+}, [players, phase, currentHole, player, host, code]);
+
+  // -----------------------------
+// SCORE SUBMISSION
+// -----------------------------
+async function submitScore(score: number) {
+  if (!code) return;
+
+  const ref = doc(db, "games", code);
+
+  const prev = players[player] || {};
+  const currentStrokes = prev.totalStrokes ?? 0;
+
+  await updateDoc(ref, {
+    [`players.${player}.holes.${currentHole}`]: score,
+    [`players.${player}.totalStrokes`]: currentStrokes + score,
+  });
+}
 
   // -----------------------------
   // NEXT HOLE (HOST ONLY)
