@@ -83,43 +83,46 @@ export default function Home() {
     const ref = doc(db, "games", gameCode);
   
   
-    await runTransaction(db, async (transaction) => {
-  
-      const snap = await transaction.get(ref);
-  
-      if (!snap.exists()) {
-        throw new Error("Game not found");
-      }
-  
-  
-      const data = snap.data();
-  
-      const existingPlayers = data.players || {};
-  
-  
-      // Do nothing if player already exists
-      if (existingPlayers[name]) {
-        return;
-      }
-  
-  
-      transaction.update(ref, {
-  
-        [`players.${name}`]: {
-          name,
-          holes: {},
-          totalPoints: 0,
-          totalStrokes: 0,
+    try {
+      await runTransaction(db, async (transaction) => {
+    
+        const snap = await transaction.get(ref);
+    
+        if (!snap.exists()) {
+          throw new Error("Game not found");
         }
-  
+    
+        const data = snap.data();
+    
+        const existingPlayers = data.players || {};
+    
+        const nameTaken = Object.keys(existingPlayers).some(
+          (playerName) =>
+            playerName.trim().toLowerCase() === name.trim().toLowerCase()
+        );
+    
+        if (nameTaken) {
+          throw new Error("Name already taken");
+        }
+    
+        transaction.update(ref, {
+          [`players.${name}`]: {
+            name,
+            holes: {},
+            totalPoints: 0,
+            totalStrokes: 0,
+          }
+        });
+    
       });
-  
-    });
-  
-  
-    router.push(
-      `/game/${gameCode}?player=${encodeURIComponent(name)}`
-    );
+    
+      router.push(
+        `/game/${gameCode}?player=${encodeURIComponent(name)}`
+      );
+    
+    } catch (error: any) {
+      alert(error.message);
+    }
   }
 
   const press = {
@@ -161,7 +164,7 @@ export default function Home() {
         {/* ---------------- HOME ---------------- */}
         {mode === "home" && (
           <>
-          <img src="/points-home.svg" style={{ padding: "30px 0", width: "100%", height: "auto" }} />
+          <img src="/points-home.svg" style={{ padding: "5px 0", width: "100%", height: "auto" }} />
             <button 
               onClick={() => setMode("create")}
               style={{
@@ -184,7 +187,7 @@ export default function Home() {
               onClick={() => setMode("join")}
               style={{
                 padding: 18,
-                background: "none",
+                background: "fff",
                 borderRadius: 14,
                 border: "0.5px solid rgba(0,0,0,0.3)",
                 fontWeight: 700,

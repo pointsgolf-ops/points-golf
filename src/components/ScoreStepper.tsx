@@ -11,8 +11,8 @@ export default function ScoreStepper({
   disabled?: boolean;
   submitted?: boolean;
 }) {
-  const [scoreValue, setScoreValue] = useState(0);
-  const ref = useRef(0);
+  const [scoreValue, setScoreValue] = useState(1);
+  const ref = useRef(1);
 
   function inc() {
     if (disabled || submitted) return;
@@ -22,7 +22,7 @@ export default function ScoreStepper({
 
   function dec() {
     if (disabled || submitted) return;
-    ref.current = Math.max(0, ref.current - 1);
+    ref.current = Math.max(1, ref.current - 1);
     setScoreValue(ref.current);
   }
 
@@ -122,7 +122,7 @@ const btn: React.CSSProperties = {
   width: 70,
   height: 70,
   borderRadius: 9999,
-  border: "0.5px solid rgba(0,0,0,0.3)",
+  border: "1px solid rgba(0,0,0,0.3)",
   color: "#000",
   background: "#fff",
   fontSize: 28,

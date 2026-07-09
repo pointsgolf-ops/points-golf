@@ -6,14 +6,14 @@ import { useRouter } from "next/navigation";
 import AppShell from "@/components/AppShell";
 
 export default function WinnerCinematic({
-  winner,
+  winners,
   score,
   leaderboard,
   courseName,
   players,
   currentHole = 18,
 }: {
-  winner: string;
+  winners: any[];
   score: number;
   leaderboard: any[];
   courseName?: string;
@@ -30,11 +30,6 @@ export default function WinnerCinematic({
     const t = setTimeout(() => setShow(true), 80);
     return () => clearTimeout(t);
   }, []);
-
-  // -----------------------------
-  // GET WINNER PLAYER DATA
-  // -----------------------------
-  const winnerPlayer = players?.[winner];
 
   // -----------------------------
   // SHARE IMAGE
@@ -78,9 +73,14 @@ export default function WinnerCinematic({
 
     document.body.removeChild(exportWrap);
 
-    const shareText = courseName?.trim()
-      ? `${winner} won Points at ${courseName} 🏌️`
-      : `${winner} won Points 🏌️`;
+    const shareNames =
+  winners.length === 1
+    ? winners[0].name
+    : winners.map((w) => w.name).join(" & ");
+
+const shareText = courseName?.trim()
+  ? `${shareNames} ${winners.length === 1 ? "won" : "tied"} Points at ${courseName} 🏌️`
+  : `${shareNames} ${winners.length === 1 ? "won" : "tied"} Points 🏌️`;
 
     canvas.toBlob(async (blob) => {
       if (!blob) return;
@@ -108,9 +108,16 @@ export default function WinnerCinematic({
     (a, b) => (b.totalPoints || 0) - (a.totalPoints || 0)
   );
 
-  const title = courseName?.trim()
-    ? `won at ${courseName}`
-    : "won";
+  const winnerText =
+  winners.length === 1
+    ? winners[0].name
+    : winners.map((w) => w.name).join(" & ");
+
+const title =
+  winners.length === 1
+    ? "won"
+    : "tied";
+
 
   return (
     <div style={screen}>
@@ -122,11 +129,17 @@ export default function WinnerCinematic({
           }}
         >
           <div className="font-display" style={exportHeader}>GAME RESULTS</div>
-          <div style={exportWinnerLabel}>{winner} {title} with {score} points</div>
+          <div style={exportWinnerLabel}>
+  {winnerText} {title}
+  {courseName ? ` at ${courseName}` : ""}
+  {" "}with {score} points
+</div>
   
           <div style={list}>
             {sorted.map((p, index) => {
-              const isWinner = p.name === winner;
+              const isWinner = winners.some(
+                (w) => w.name === p.name
+              );
   
               return (
                 <div

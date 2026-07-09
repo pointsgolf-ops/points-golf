@@ -231,12 +231,16 @@ setPlayers((prev: any) => {
     });
   }, [players, currentHole]);
 
-  const winner = useMemo(() => {
-    const sorted = [...leaderboard].sort(
-      (a, b) => b.totalPoints - a.totalPoints
+  const winners = useMemo(() => {
+    if (!leaderboard.length) return [];
+  
+    const highest = Math.max(
+      ...leaderboard.map((p) => p.totalPoints)
     );
-
-    return sorted[0] || { name: "No winner", totalPoints: 0 };
+  
+    return leaderboard.filter(
+      (p) => p.totalPoints === highest
+    );
   }, [leaderboard]);
 
   // -----------------------------
@@ -429,7 +433,7 @@ setPlayers((prev: any) => {
   style={{
     padding: 18,
     marginTop: 24,
-    background: "none",
+    background: "fff",
     borderRadius: 14,
     border: "0.5px solid rgba(0,0,0,0.3)",
     fontWeight: 700,
@@ -531,7 +535,7 @@ setPlayers((prev: any) => {
       ...btn,
       marginTop: 16,
       background: "#fff",
-      border: "0.5px solid #000",
+      border: "0.5px solid rgba(0,0,0,0.3)",
     }}
   >
     End Game
@@ -565,7 +569,7 @@ setPlayers((prev: any) => {
           onMouseUp={pressUp}
           onMouseLeave={pressUp}
         >
-          Next Hole
+          Continue
         </button>
         ) : (
           <div style={{ textAlign: "center" }}>
@@ -580,12 +584,12 @@ setPlayers((prev: any) => {
     return (
       <AppShell scorecard={scorecard}>
         <WinnerCinematic
-          winner={winner.name}
-          score={winner.totalPoints}
-          leaderboard={leaderboard}
-          courseName={courseName}
-          players={players}
-        />
+  winners={winners}
+  score={winners[0]?.totalPoints ?? 0}
+  leaderboard={leaderboard}
+  courseName={courseName}
+  players={players}
+/>
       </AppShell>
     );
   }

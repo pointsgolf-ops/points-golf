@@ -21,8 +21,13 @@ export default function AppShell({
   const [showFAQ, setShowFAQ] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = showScorecard ? "hidden" : "";
-  }, [showScorecard]);
+    document.body.style.overflow =
+      showScorecard || showFAQ ? "hidden" : "";
+  
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showScorecard, showFAQ]);
 
   return (
     <div style={outer}>
@@ -86,17 +91,19 @@ export default function AppShell({
     {/* BOTTOM SHEET */}
     <div style={sheet}>
 
-    <button
-  onClick={() => setShowScorecard(false)}
-  style={close}
-  aria-label="Close"
->
-  <X/>
-</button>
+    <div style={sheetHeader}>
+  <h2 style={sheetTitle}>
+    Your Scorecard
+  </h2>
 
-      <h2 style={{ fontSize: 20, fontWeight: 800 }}>
-        Your Scorecard
-      </h2>
+  <button
+    onClick={() => setShowScorecard(false)}
+    style={close}
+    aria-label="Close"
+  >
+    <X />
+  </button>
+</div>
 
       <div
   style={{
@@ -119,17 +126,19 @@ export default function AppShell({
     />
 
     <div style={sheet}>
-    <button
-  onClick={() => setShowFAQ(false)}
-  style={close}
-  aria-label="Close"
->
-  <X/>
-</button>
+    <div style={sheetHeader}>
+  <h2 style={sheetTitle}>
+    Frequently Asked Questions
+  </h2>
 
-      <h2 style={{ fontSize: 20, fontWeight: 800 }}>
-        Frequently Asked Questions
-      </h2>
+  <button
+    onClick={() => setShowFAQ(false)}
+    style={close}
+    aria-label="Close"
+  >
+    <X />
+  </button>
+</div>
 
       <div style={faqContainer}>
   {faq}
@@ -215,8 +224,8 @@ const content: React.CSSProperties = {
 
   const close: React.CSSProperties = {
     position: "absolute",
-    top: 18,
-    right: 16,
+    top: 24,
+    right: 20,
     width: 40,
     height: 40,
     display: "flex",
@@ -228,6 +237,20 @@ const content: React.CSSProperties = {
     padding: 0,
   };
 
+  const sheetHeader: React.CSSProperties = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  };
+  
+  const sheetTitle: React.CSSProperties = {
+    fontSize: 20,
+    fontWeight: 800,
+    margin: 0,
+    paddingRight: 16,
+  };
+
 const row: React.CSSProperties = {
   padding: "14px 0",
   borderBottom: "1px solid rgba(0,0,0,0.3)",
@@ -235,15 +258,18 @@ const row: React.CSSProperties = {
 };
   
 const sheet: React.CSSProperties = {
-  position: "absolute",
+  position: "fixed",
   inset: 0,
-  width: "100%",
+  left: "50%",
+transform: "translateX(-50%)",
+width: "100%",
+maxWidth: 440,
   minHeight: "100vh",
-  background: "#fff",
+  background: "#FBFBFB",
   overflowY: "auto",
   WebkitOverflowScrolling: "touch",
   zIndex: 2100,
-  padding: "80px 20px 40px",
+  padding: "28px 20px 40px",
   boxSizing: "border-box",
 };
 
