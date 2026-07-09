@@ -42,16 +42,40 @@ export default function WinnerCinematic({
 
   exportWrap.style.width = "540px";
   exportWrap.style.height = "960px";
-  exportWrap.style.backgroundImage = "url('/points-shareBG.png')";
-  exportWrap.style.backgroundSize = "cover";
-  exportWrap.style.backgroundPosition = "center";
-  exportWrap.style.backgroundRepeat = "no-repeat";
-  exportWrap.style.display = "flex";
-  exportWrap.style.alignItems = "center";
-  exportWrap.style.justifyContent = "center";
+  exportWrap.style.background = "#FBFBFB";
+exportWrap.style.display = "flex";
+exportWrap.style.flexDirection = "column";
+exportWrap.style.justifyContent = "space-between";
+exportWrap.style.alignItems = "center";
+exportWrap.style.padding = "50px 0";
   exportWrap.style.position = "fixed";
   exportWrap.style.left = "-99999px";
   exportWrap.style.top = "0";
+
+const topBrand = document.createElement("div");
+topBrand.style.display = "flex";
+topBrand.style.flexDirection = "column";
+topBrand.style.alignItems = "center";
+topBrand.style.gap = "10px";
+
+const logo = document.createElement("img");
+logo.src = "/points-logo.svg";
+logo.style.width = "110px";
+
+const text = document.createElement("div");
+text.innerText = "Play at pointsgolf.com.au";
+text.style.fontFamily = "Space Grotesk, sans-serif";
+text.style.fontSize = "18px";
+text.style.fontWeight = "500";
+text.style.color = "#000";
+
+topBrand.appendChild(logo);
+topBrand.appendChild(text);
+
+
+const bottomLogo = document.createElement("img");
+bottomLogo.src = "/points-home.svg";
+bottomLogo.style.width = "150px";
 
   const clone = cardRef.current.cloneNode(true) as HTMLElement;
   clone.style.transform = "none";
@@ -65,8 +89,23 @@ export default function WinnerCinematic({
       "8px 26px 26px";
   });
 
-  exportWrap.appendChild(clone);
+  const center = document.createElement("div");
+
+center.style.width = "100%";
+center.style.display = "flex";
+center.style.justifyContent = "center";
+
+center.appendChild(clone);
+
+exportWrap.appendChild(topBrand);
+exportWrap.appendChild(center);
+exportWrap.appendChild(bottomLogo);
   document.body.appendChild(exportWrap);
+
+await Promise.all([
+  logo.decode(),
+  bottomLogo.decode(),
+]);
 
   const canvas = await html2canvas(exportWrap, {
     backgroundColor: null,
