@@ -164,7 +164,7 @@ export default function Home() {
         {/* ---------------- HOME ---------------- */}
         {mode === "home" && (
           <>
-          <img src="/points-home.svg" style={{ padding: "5px 0", width: "100%", display: "block", transform: "translateX(-3px)", height: "auto" }} />
+          <img src="/points-home.svg" style={{ padding: "5px 0", width: "100%", display: "block", transform: "translateX(-2px)", height: "auto" }} />
             <button 
               onClick={() => setMode("create")}
               style={{
