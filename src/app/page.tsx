@@ -187,7 +187,7 @@ export default function Home() {
               onClick={() => setMode("join")}
               style={{
                 padding: 18,
-                background: "fff",
+                background: "#fff",
                 borderRadius: 14,
                 border: "0.5px solid rgba(0,0,0,0.3)",
                 fontWeight: 700,

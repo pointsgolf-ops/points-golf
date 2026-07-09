@@ -433,7 +433,7 @@ setPlayers((prev: any) => {
   style={{
     padding: 18,
     marginTop: 24,
-    background: "fff",
+    background: "#fff",
     borderRadius: 14,
     border: "0.5px solid rgba(0,0,0,0.3)",
     fontWeight: 700,
