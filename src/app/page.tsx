@@ -144,10 +144,10 @@ export default function Home() {
   showFAQButton={true}
   faq={
     <>
-      <p><b>How does Points work?</b><br />It’s simple. Score one point for every player you beat outright on each hole.</p>
-      <p><b>Stoke play or match play?</b><br />A bit of both. Strokes are recorded each hole and used to calculate your points, by comparing your score against other players in your group. Like match play, every hole is its own contest, so one bad hole won’t ruin your round, but one great hole can quickly move you up the leaderboard. The total number of points over 18 holes determines the winner.</p>
-      <p><b>Where can I play?</b><br />Points works on any course. No ratings or downloads required.</p>
-      <p><b>How many players and holes can I play?</b><br />Points works with 2+ players and can be played over 9 or 18 holes.</p>
+      <p><b>How does Points work?</b><br />It’s golf as you know it, scored differently. Each hole, players earn one point for every opponent they beat outright.</p>
+      <p><b>Stoke play or match play?</b><br />A bit of both. Strokes are recorded each hole and used to calculate your points, by comparing your score against other players in your group. Like match play, every hole is its own contest, so one bad hole won’t ruin your round, but one great hole can quickly move you up the leaderboard. The total number of points over your round determines the winner.</p>
+      <p><b>Where can I play?</b><br />Points works on any course. No ratings, indexes or maps required.</p>
+      <p><b>How many players and holes can I play?</b><br />You'll need at least two players and can play over 9 or 18 holes.</p>
       <p><b>Can I view my score during a round?</b><br />Yes. Your live scorecard is always available so you can review strokes and points hole-by-hole at any time.</p>
       <p><b>How do handicaps work?</b><br />Points uses gross scores by default. If your group prefers, handicaps can be adjusted manually before entering scores for each hole.</p>
     </>
