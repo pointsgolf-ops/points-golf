@@ -180,7 +180,7 @@ const title =
   onClick={handleShare}
   style={shareBtn}
 >
-  Share Results
+  Save Results
 </button>
         <button onClick={() => router.push("/")} style={playAgainBtn}>
           Play Again
@@ -204,7 +204,7 @@ const card: React.CSSProperties = {
 };
 
 const shareBtn = {
-  ...btn("#c08e43"),
+  ...btn("#C2DD00"),
   border: "none",
 };
 
