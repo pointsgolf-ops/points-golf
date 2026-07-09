@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import { useRouter } from "next/navigation";
 import AppShell from "@/components/AppShell";
@@ -21,88 +21,98 @@ export default function WinnerCinematic({
   currentHole?: number;
 }) {
   const [show, setShow] = useState(false);
+  const [shareFile, setShareFile] = useState<File | null>(null);
   const [showScorecard, setShowScorecard] = useState(false);
 
   const cardRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   useEffect(() => {
-    const t = setTimeout(() => setShow(true), 80);
-    return () => clearTimeout(t);
-  }, []);
+  const t = setTimeout(() => setShow(true), 80);
+
+  generateShareImage();
+
+  return () => clearTimeout(t);
+}, []);
+
+  async function generateShareImage() {
+  if (!cardRef.current) return;
+
+  const exportWrap = document.createElement("div");
+
+  exportWrap.style.width = "540px";
+  exportWrap.style.height = "960px";
+  exportWrap.style.backgroundImage = "url('/points-shareBG.png')";
+  exportWrap.style.backgroundSize = "cover";
+  exportWrap.style.backgroundPosition = "center";
+  exportWrap.style.backgroundRepeat = "no-repeat";
+  exportWrap.style.display = "flex";
+  exportWrap.style.alignItems = "center";
+  exportWrap.style.justifyContent = "center";
+  exportWrap.style.position = "fixed";
+  exportWrap.style.left = "-99999px";
+  exportWrap.style.top = "0";
+
+  const clone = cardRef.current.cloneNode(true) as HTMLElement;
+  clone.style.transform = "none";
+  clone.style.width = "500px";
+
+  clone.querySelectorAll('[style*="grid"]').forEach((el) => {
+    (el as HTMLElement).style.fontSize = "26px";
+    (el as HTMLElement).style.gridTemplateColumns =
+      "1fr 120px 100px";
+    (el as HTMLElement).style.padding =
+      "8px 26px 26px";
+  });
+
+  exportWrap.appendChild(clone);
+  document.body.appendChild(exportWrap);
+
+  const canvas = await html2canvas(exportWrap, {
+    backgroundColor: null,
+    scale: 3,
+    useCORS: true,
+  });
+
+  document.body.removeChild(exportWrap);
+
+  const blob = await new Promise<Blob | null>((resolve) =>
+    canvas.toBlob(resolve)
+  );
+
+  if (!blob) return;
+
+  setShareFile(
+    new File([blob], "result.png", {
+      type: "image/png",
+    })
+  );
+}
+
 
   // -----------------------------
   // SHARE IMAGE
   // -----------------------------
   async function handleShare() {
-    if (!cardRef.current) return;
+  if (!shareFile) return;
 
-    const exportWrap = document.createElement("div");
+  const shareNames =
+    winners.length === 1
+      ? winners[0].name
+      : winners.map((w) => w.name).join(" & ");
 
-    exportWrap.style.width = "540px";
-    exportWrap.style.height = "960px";
-    exportWrap.style.backgroundImage = "url('/points-shareBG.png')";
-    exportWrap.style.backgroundSize = "cover";
-    exportWrap.style.backgroundPosition = "center";
-    exportWrap.style.backgroundRepeat = "no-repeat";
-    exportWrap.style.display = "flex";
-    exportWrap.style.alignItems = "center";
-    exportWrap.style.justifyContent = "center";
-    exportWrap.style.position = "fixed";
-    exportWrap.style.left = "-99999px";
-    exportWrap.style.top = "0";
+  const shareText = courseName?.trim()
+    ? `${shareNames} ${winners.length === 1 ? "won" : "tied"} Points at ${courseName} 🏌️`
+    : `${shareNames} ${winners.length === 1 ? "won" : "tied"} Points 🏌️`;
 
-    const clone = cardRef.current.cloneNode(true) as HTMLElement;
-    clone.style.transform = "none";
-    clone.style.width = "500px";
-    
-    clone.querySelectorAll('[style*="grid"]').forEach((el) => {
-      (el as HTMLElement).style.fontSize = "26px";
-      (el as HTMLElement).style.gridTemplateColumns = "1fr 120px 100px";
-      (el as HTMLElement).style.padding = "8px 26px 26px";
-    });
-
-    exportWrap.appendChild(clone);
-    document.body.appendChild(exportWrap);
-
-    const canvas = await html2canvas(exportWrap, {
-      backgroundColor: null,
-      scale: 3,
-      useCORS: true,
-    });
-
-    document.body.removeChild(exportWrap);
-
-    const shareNames =
-  winners.length === 1
-    ? winners[0].name
-    : winners.map((w) => w.name).join(" & ");
-
-const shareText = courseName?.trim()
-  ? `${shareNames} ${winners.length === 1 ? "won" : "tied"} Points at ${courseName} 🏌️`
-  : `${shareNames} ${winners.length === 1 ? "won" : "tied"} Points 🏌️`;
-
-    canvas.toBlob(async (blob) => {
-      if (!blob) return;
-
-      const file = new File([blob], "result.png", { type: "image/png" });
-
-      if (navigator.canShare?.({ files: [file] })) {
-        await navigator.share({
-          title: "Points Golf",
-          text: shareText,
-          files: [file],
-        });
-      } else {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "result.png";
-        a.click();
-        URL.revokeObjectURL(url);
-      }
+  if (navigator.canShare?.({ files: [shareFile] })) {
+    await navigator.share({
+      title: "Points Golf",
+      text: shareText,
+      files: [shareFile],
     });
   }
+}
 
   const sorted = [...(leaderboard || [])].sort(
     (a, b) => (b.totalPoints || 0) - (a.totalPoints || 0)
@@ -166,7 +176,12 @@ const title =
   
         {/* ACTIONS */}
         <div style={actions}>
-  
+        <button
+  onClick={handleShare}
+  style={shareBtn}
+>
+  Share Results
+</button>
         <button onClick={() => router.push("/")} style={playAgainBtn}>
           Play Again
         </button>
