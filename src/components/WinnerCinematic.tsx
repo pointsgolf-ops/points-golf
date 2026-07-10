@@ -64,6 +64,11 @@ async function generateShareImage() {
   clone.style.borderRadius = "20px";
   clone.style.border = "none";
 
+  clone.querySelectorAll('[style*="grid"]').forEach((el) => {
+      (el as HTMLElement).style.fontSize = "26px";
+      (el as HTMLElement).style.gridTemplateColumns = "1fr 120px 100px";
+      (el as HTMLElement).style.padding = "8px 26px 26px";
+    });
 
   exportWrap.appendChild(clone);
 
