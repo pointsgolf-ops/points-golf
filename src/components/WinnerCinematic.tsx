@@ -45,9 +45,8 @@ async function generateShareImage() {
   exportWrap.style.position = "fixed";
   exportWrap.style.left = "-99999px";
   exportWrap.style.top = "0";
-
   exportWrap.style.backgroundImage =
-    "url('/share-background.svg')";
+    "url('/share-background.png')";
   exportWrap.style.backgroundSize = "cover";
   exportWrap.style.backgroundPosition = "center";
   exportWrap.style.backgroundRepeat = "no-repeat";
@@ -62,7 +61,7 @@ async function generateShareImage() {
   clone.style.transform = "none";
   clone.style.width = "460px";
   clone.style.background = "#fff";
-  clone.style.borderRadius = "24px";
+  clone.style.borderRadius = "20px";
   clone.style.border = "none";
 
 
