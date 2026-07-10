@@ -33,9 +33,9 @@ export default function WinnerCinematic({
   generateShareImage();
 
   return () => clearTimeout(t);
-}, []);
+}, [cardRef.current]);
 
-  async function generateShareImage() {
+async function generateShareImage() {
   if (!cardRef.current) return;
 
   const exportWrap = document.createElement("div");
@@ -46,43 +46,24 @@ export default function WinnerCinematic({
   exportWrap.style.left = "-99999px";
   exportWrap.style.top = "0";
 
-  // SVG BACKGROUND
   exportWrap.style.backgroundImage =
     "url('/share-background.svg')";
-  exportWrap.style.backgroundSize = "540px 960px";
-  exportWrap.style.backgroundRepeat = "no-repeat";
+  exportWrap.style.backgroundSize = "cover";
   exportWrap.style.backgroundPosition = "center";
+  exportWrap.style.backgroundRepeat = "no-repeat";
 
   exportWrap.style.display = "flex";
   exportWrap.style.alignItems = "center";
   exportWrap.style.justifyContent = "center";
 
 
-  // Clone results card
   const clone = cardRef.current.cloneNode(true) as HTMLElement;
 
   clone.style.transform = "none";
   clone.style.width = "460px";
-  clone.style.padding = "24px";
-
-  // Export card styling
   clone.style.background = "#fff";
-  clone.style.border = "none";
   clone.style.borderRadius = "24px";
-  clone.style.boxShadow =
-    "0 12px 30px rgba(0,0,0,0.12)";
-
-
-  // Make rows larger for share image
-  clone.querySelectorAll('[style*="grid"]').forEach((el) => {
-    const item = el as HTMLElement;
-
-    item.style.fontSize = "26px";
-    item.style.gridTemplateColumns =
-      "1fr 120px 100px";
-    item.style.padding =
-      "12px 24px";
-  });
+  clone.style.border = "none";
 
 
   exportWrap.appendChild(clone);
@@ -90,10 +71,15 @@ export default function WinnerCinematic({
   document.body.appendChild(exportWrap);
 
 
+  // Wait for SVG background to load
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+
   const canvas = await html2canvas(exportWrap, {
-    backgroundColor: null,
     scale: 3,
     useCORS: true,
+    allowTaint: false,
+    backgroundColor: null,
   });
 
 
@@ -101,20 +87,22 @@ export default function WinnerCinematic({
 
 
   const blob = await new Promise<Blob | null>((resolve) =>
-    canvas.toBlob(resolve)
+    canvas.toBlob(resolve, "image/png")
   );
 
 
-  if (!blob) return;
+  if (!blob) {
+    console.error("Could not create image blob");
+    return;
+  }
 
 
   setShareFile(
-    new File([blob], "result.png", {
+    new File([blob], "points-results.png", {
       type: "image/png",
     })
   );
 }
-
 
   // -----------------------------
   // SHARE IMAGE
