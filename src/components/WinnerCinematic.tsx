@@ -47,45 +47,51 @@ exportWrap.style.display = "flex";
 exportWrap.style.flexDirection = "column";
 exportWrap.style.alignItems = "center";
 exportWrap.style.justifyContent = "center";
-exportWrap.style.gap = "50px";
+exportWrap.style.gap = "40px";
 exportWrap.style.padding = "40px";
   exportWrap.style.position = "fixed";
   exportWrap.style.left = "-99999px";
   exportWrap.style.top = "0";
 
 const topBrand = document.createElement("div");
+topBrand.style.width = "100%";
 topBrand.style.display = "flex";
 topBrand.style.flexDirection = "column";
 topBrand.style.alignItems = "center";
 topBrand.style.justifyContent = "center";
-topBrand.style.width = "100%";
 topBrand.style.gap = "4px";
 
 const logo = document.createElement("img");
 logo.src = "/points-logo.svg";
-logo.style.width = "260px";
-logo.style.height = "auto";
+logo.style.width = "280px";
 logo.style.display = "block";
 
 const text = document.createElement("div");
 text.innerText = "Play at pointsgolf.com.au";
 text.style.fontFamily = "Space Grotesk, sans-serif";
 text.style.fontSize = "20px";
-text.style.fontWeight = "800";
-text.style.color = "#000";
+text.style.fontWeight = "700";
 text.style.textAlign = "center";
+text.style.width = "100%";
+text.style.color = "#000";
 
 topBrand.appendChild(logo);
 topBrand.appendChild(text);
 
+const bottomWrap = document.createElement("div");
+bottomWrap.style.width = "100%";
+bottomWrap.style.display = "flex";
+bottomWrap.style.justifyContent = "center";
+bottomWrap.style.alignItems = "center";
 
 const bottomLogo = document.createElement("img");
 bottomLogo.src = "/points-home.svg";
-bottomLogo.style.width = "260px";
-bottomLogo.style.height = "auto";
-bottomLogo.style.display = "block";
+bottomLogo.style.width = "300px";
+bottomLogo.style.height = "300px";
 bottomLogo.style.objectFit = "contain";
-bottomLogo.style.flexShrink = "0";
+bottomLogo.style.display = "block";
+
+bottomWrap.appendChild(bottomLogo);
 
   const clone = cardRef.current.cloneNode(true) as HTMLElement;
   clone.style.transform = "none";
@@ -111,7 +117,7 @@ center.appendChild(clone);
 
 exportWrap.appendChild(topBrand);
 exportWrap.appendChild(center);
-exportWrap.appendChild(bottomLogo);
+exportWrap.appendChild(bottomWrap);
   document.body.appendChild(exportWrap);
 
 await Promise.all([
