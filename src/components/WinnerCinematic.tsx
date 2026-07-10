@@ -47,7 +47,7 @@ exportWrap.style.display = "flex";
 exportWrap.style.flexDirection = "column";
 exportWrap.style.justifyContent = "space-between";
 exportWrap.style.alignItems = "center";
-exportWrap.style.padding = "30px 0";
+exportWrap.style.padding = "40px 30px";
   exportWrap.style.position = "fixed";
   exportWrap.style.left = "-99999px";
   exportWrap.style.top = "0";
@@ -56,29 +56,30 @@ const topBrand = document.createElement("div");
 topBrand.style.display = "flex";
 topBrand.style.flexDirection = "column";
 topBrand.style.alignItems = "center";
-topBrand.style.gap = "2px";
+topBrand.style.justifyContent = "center";
+topBrand.style.gap = "4px";
 
 const logo = document.createElement("img");
 logo.src = "/points-logo.svg";
-logo.style.width = "330px";
-logo.style.height = "auto";
+logo.style.height = "90px";
+logo.style.width = "auto";
 
 const text = document.createElement("div");
 text.innerText = "Play at pointsgolf.com.au";
 text.style.fontFamily = "Space Grotesk, sans-serif";
-text.style.fontSize = "16px";
+text.style.fontSize = "18px";
 text.style.fontWeight = "500";
 text.style.color = "#000";
 
 topBrand.appendChild(logo);
 topBrand.appendChild(text);
 
-
 const bottomLogo = document.createElement("img");
 bottomLogo.src = "/points-home.svg";
-bottomLogo.style.width = "120px";
-bottomLogo.style.height = "120px";
+bottomLogo.style.width = "140px";
+bottomLogo.style.height = "140px";
 bottomLogo.style.objectFit = "contain";
+bottomLogo.style.flexShrink = "0";
 
   const clone = cardRef.current.cloneNode(true) as HTMLElement;
   clone.style.transform = "none";
