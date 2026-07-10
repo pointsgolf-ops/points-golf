@@ -42,88 +42,53 @@ export default function WinnerCinematic({
 
   exportWrap.style.width = "540px";
   exportWrap.style.height = "960px";
-  exportWrap.style.background = "#FBFBFB";
-exportWrap.style.display = "flex";
-exportWrap.style.flexDirection = "column";
-exportWrap.style.alignItems = "center";
-exportWrap.style.justifyContent = "center";
-exportWrap.style.gap = "40px";
-exportWrap.style.padding = "40px";
   exportWrap.style.position = "fixed";
   exportWrap.style.left = "-99999px";
   exportWrap.style.top = "0";
 
-const topBrand = document.createElement("div");
-topBrand.style.width = "100%";
-topBrand.style.display = "flex";
-topBrand.style.flexDirection = "column";
-topBrand.style.alignItems = "center";
-topBrand.style.justifyContent = "center";
-topBrand.style.gap = "4px";
+  // SVG BACKGROUND
+  exportWrap.style.backgroundImage =
+    "url('/share-background.svg')";
+  exportWrap.style.backgroundSize = "540px 960px";
+  exportWrap.style.backgroundRepeat = "no-repeat";
+  exportWrap.style.backgroundPosition = "center";
 
-const logo = document.createElement("img");
-logo.src = "/points-logo.svg";
-logo.style.width = "280px";
-logo.style.display = "block";
+  exportWrap.style.display = "flex";
+  exportWrap.style.alignItems = "center";
+  exportWrap.style.justifyContent = "center";
 
-const text = document.createElement("div");
-text.innerText = "Play at pointsgolf.com.au";
-text.style.fontFamily = "Space Grotesk, sans-serif";
-text.style.fontSize = "20px";
-text.style.fontWeight = "700";
-text.style.textAlign = "center";
-text.style.width = "100%";
-text.style.color = "#000";
 
-topBrand.appendChild(logo);
-topBrand.appendChild(text);
-
-const bottomWrap = document.createElement("div");
-bottomWrap.style.width = "100%";
-bottomWrap.style.display = "flex";
-bottomWrap.style.justifyContent = "center";
-bottomWrap.style.alignItems = "center";
-
-const bottomLogo = document.createElement("img");
-bottomLogo.src = "/points-home.svg";
-bottomLogo.style.width = "300px";
-bottomLogo.style.height = "300px";
-bottomLogo.style.objectFit = "contain";
-bottomLogo.style.display = "block";
-
-bottomWrap.appendChild(bottomLogo);
-
+  // Clone results card
   const clone = cardRef.current.cloneNode(true) as HTMLElement;
-  clone.style.transform = "none";
-  clone.style.width = "500px";
 
+  clone.style.transform = "none";
+  clone.style.width = "460px";
+  clone.style.padding = "24px";
+
+  // Export card styling
+  clone.style.background = "#fff";
+  clone.style.border = "none";
+  clone.style.borderRadius = "24px";
+  clone.style.boxShadow =
+    "0 12px 30px rgba(0,0,0,0.12)";
+
+
+  // Make rows larger for share image
   clone.querySelectorAll('[style*="grid"]').forEach((el) => {
-    (el as HTMLElement).style.fontSize = "26px";
-    (el as HTMLElement).style.gridTemplateColumns =
+    const item = el as HTMLElement;
+
+    item.style.fontSize = "26px";
+    item.style.gridTemplateColumns =
       "1fr 120px 100px";
-    (el as HTMLElement).style.padding =
-      "8px 26px 26px";
+    item.style.padding =
+      "12px 24px";
   });
 
-  const center = document.createElement("div");
 
-center.style.width = "100%";
-center.style.display = "flex";
-center.style.justifyContent = "center";
-center.style.flex = "1";
-center.style.alignItems = "center";
+  exportWrap.appendChild(clone);
 
-center.appendChild(clone);
-
-exportWrap.appendChild(topBrand);
-exportWrap.appendChild(center);
-exportWrap.appendChild(bottomWrap);
   document.body.appendChild(exportWrap);
 
-await Promise.all([
-  logo.decode(),
-  bottomLogo.decode(),
-]);
 
   const canvas = await html2canvas(exportWrap, {
     backgroundColor: null,
@@ -131,19 +96,24 @@ await Promise.all([
     useCORS: true,
   });
 
+
   document.body.removeChild(exportWrap);
+
 
   const blob = await new Promise<Blob | null>((resolve) =>
     canvas.toBlob(resolve)
   );
 
+
   if (!blob) return;
+
 
   setShareFile(
     new File([blob], "result.png", {
       type: "image/png",
     })
   );
+}
 }
 
 
@@ -258,6 +228,7 @@ const card: React.CSSProperties = {
   borderRadius: 18,
   background: "#fff",
   border: "0.5px solid rgba(0,0,0,0.3)",
+  width: "100%",
 };
 
 const shareBtn = {
