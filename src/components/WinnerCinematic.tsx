@@ -60,13 +60,13 @@ topBrand.style.gap = "10px";
 
 const logo = document.createElement("img");
 logo.src = "/points-logo.svg";
-logo.style.width = "110px";
+logo.style.width = "100%";
 
 const text = document.createElement("div");
 text.innerText = "Play at pointsgolf.com.au";
 text.style.fontFamily = "Space Grotesk, sans-serif";
-text.style.fontSize = "18px";
-text.style.fontWeight = "500";
+text.style.fontSize = "20px";
+text.style.fontWeight = "800";
 text.style.color = "#000";
 
 topBrand.appendChild(logo);
@@ -75,7 +75,7 @@ topBrand.appendChild(text);
 
 const bottomLogo = document.createElement("img");
 bottomLogo.src = "/points-home.svg";
-bottomLogo.style.width = "150px";
+bottomLogo.style.width = "100%";
 
   const clone = cardRef.current.cloneNode(true) as HTMLElement;
   clone.style.transform = "none";
