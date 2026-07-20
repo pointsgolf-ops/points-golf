@@ -144,7 +144,7 @@ export default function Home() {
   showFAQButton={true}
   faq={
     <>
-      <p><b>How does Points work?</b><br />Points is a side game played alongside your normal round of golf. Simply record your stroke play score as you normally would, and be awarded one point for every opponent you beat outright on each hole. Like match play, every tee shot marks the beginning of a new contest, so one bad hole won’t ruin your round, but one great hole can quickly move you up the leaderboard. The player with the most points at the end of the round wins.</p>
+      <p><b>How does Points work?</b><br />Points is a side game played alongside your normal round of golf.<br /><br />Simply record your stroke play score as you normally would, and be awarded one point for every opponent you beat outright on that hole. Each tee box marks the beginning of a new contest, and a new opportunity to earn points.<br /><br />The player with the most points at the end of the round wins.</p>
       <p><b>Where can I play?</b><br />Points works on any course. No ratings, indexes or maps required.</p>
       <p><b>How many players and holes can I play?</b><br />You'll need at least two players and can play over 9 or 18 holes.</p>
       <p><b>Can I view my score during a round?</b><br />Yes. Your live scorecard is always available and shows both your stroke play scores and points totals.</p>
