@@ -33,21 +33,23 @@ export default function HoleBreakdown({
 
       <div style={list}>
         {sorted.map((p, index) => {
-          const isWinner = winners.some((w) => w.name === p.name);
+          const isWinner =
+  maxPoints > 0 && winners.some((w) => w.name === p.name);
 
           return (
             <div
-              key={p.name}
-              style={{
-                ...row,
-                border: isWinner
-                  ? "1px solid #FFD700"
-                  : "0.5px solid rgba(0,0,0,0.3)",
+  key={p.name}
+  className={isWinner ? "winner-row" : undefined}
+  style={{
+    ...row,
+    border: isWinner
+      ? "1px solid #FFD700"
+      : "0.5px solid rgba(0,0,0,0.3)",
 
-                background: isWinner ? "#fff" : "#fff",
-                transition: "all 200ms ease",
-              }}
-            >
+    background: "#fff",
+    transition: "all 200ms ease",
+  }}
+>
               <div style={left}>
                 <div style={rank}>{index + 1}</div>
                 <div style={name}>{p.name}</div>
@@ -55,7 +57,12 @@ export default function HoleBreakdown({
 
               <div style={scoreCenter}>{p.score}</div>
 
-              <div style={points}>+{p.points} pts</div>
+              <div
+  style={points}
+  className={isWinner ? "points-pop" : undefined}
+>
+  +{p.points} pts
+</div>
             </div>
           );
         })}
