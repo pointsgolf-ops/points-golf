@@ -44,7 +44,7 @@ export default function RootLayout({
     fontFamily: "var(--font-space-grotesk)",
     letterSpacing: "-0.01em",
     color: "#000000",
-    background: "#FBFBFB",
+    background: "#FFF",
     colorScheme: "only light",
   }}
 >

@@ -604,7 +604,7 @@ const btn: React.CSSProperties = {
   padding: 18,
   borderRadius: 14,
   border: "none",
-  background: "#C2DD00",
+  background: "#D7EE44",
   color: "#000",
   fontWeight: 700,
   fontSize: 20,

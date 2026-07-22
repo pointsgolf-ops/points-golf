@@ -223,7 +223,7 @@ const card: React.CSSProperties = {
 };
 
 const shareBtn = {
-  ...btn("#C2DD00"),
+  ...btn("#D7EE44"),
   border: "none",
 };
 

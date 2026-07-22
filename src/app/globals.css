@@ -2,17 +2,17 @@
 
 :root {
   color-scheme: only light;
-  --background: #FBFBFB;
+  --background: #FFF;
   --foreground: #000000;
 }
 
 html {
   color-scheme: only light;
-  background: #FBFBFB;
+  background: #FFF;
 }
 
 body {
-  background: #FBFBFB !important;
+  background: #FFF !important;
   color: #000000 !important;
   font-family: var(--font-space-grotesk);
   -webkit-text-fill-color: #000000;

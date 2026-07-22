@@ -158,7 +158,7 @@ export default function AppShell({
 
 const outer: React.CSSProperties = {
     minHeight: "100vh",
-    background: "#FBFBFB",
+    background: "#FFF",
     display: "flex",
     justifyContent: "center",
   };
@@ -166,7 +166,7 @@ const outer: React.CSSProperties = {
   const device: React.CSSProperties = {
     width: "100%",
     maxWidth: 440,
-    background: "#FBFBFB",
+    background: "#FFF",
     minHeight: "100vh",
     position: "relative",
   };
@@ -265,7 +265,7 @@ const sheet: React.CSSProperties = {
   width: "100%",
   maxWidth: 440,
   minHeight: "100dvh",
-  background: "#FBFBFB",
+  background: "#FFF",
   overflowY: "auto",
   WebkitOverflowScrolling: "touch",
   zIndex: 2100,

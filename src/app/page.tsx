@@ -163,12 +163,12 @@ export default function Home() {
         {/* ---------------- HOME ---------------- */}
         {mode === "home" && (
           <>
-          <img src="/points-home.svg" style={{ padding: "5px 0", width: "100%", display: "block", transform: "translateX(-3px)", height: "auto" }} />
+          <object data="/points-home.svg"></object>
             <button 
               onClick={() => setMode("create")}
               style={{
                 padding: 18,
-                background: "#C2DD00",
+                background: "#D7EE44",
                 border: "none",
                 borderRadius: 14,
                 fontWeight: 700,
@@ -279,7 +279,7 @@ export default function Home() {
               onClick={handleCreateGame}
               style={{
                 padding: 18,
-                background: "#C2DD00",
+                background: "#D7EE44",
                 border: "none",
                 borderRadius: 14,
                 fontWeight: 700,
@@ -335,7 +335,7 @@ export default function Home() {
               onClick={handleJoinGame}
               style={{
                 padding: 18,
-                background: "#C2DD00",
+                background: "#D7EE44",
                 border: "none",
                 borderRadius: 14,
                 fontWeight: 700,
