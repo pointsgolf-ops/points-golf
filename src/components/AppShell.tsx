@@ -55,7 +55,7 @@ export default function AppShell({
     <div style={logo}>
       <img
         src="/points-logo.svg"
-        style={{ height: 60 }}
+        style={{ height: 70 }}
       />
     </div>
 
