@@ -163,7 +163,13 @@ export default function Home() {
         {/* ---------------- HOME ---------------- */}
         {mode === "home" && (
           <>
-          <object data="/points-home.svg"></object>
+          <object
+  data="/points-home.svg"
+  style={{
+    padding: 10,
+    transform: "translateX(-2px)",
+  }}
+></object>
             <button 
               onClick={() => setMode("create")}
               style={{
